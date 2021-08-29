@@ -1,12 +1,13 @@
 log("fight loaded");
 
 function readyToFight() {
+    logDebug("readyToFight");
     return character.hp > character.max_hp * .90
         && character.mp > character.max_mp * .90;
 }
 
 function autoFight(target) {
-    logDebug("autoFight")
+    logDebug("autoFight");
 	if (can_attack(target)) {
         change_target(target);
 		attack(target);
@@ -14,7 +15,7 @@ function autoFight(target) {
 }
 
 function selectTarget() {
-    logDebug("selectTarget")
+    logDebug("selectTarget");
     let target = get_targeted_monster();
     if (validateTarget(target)) {
         return target;
@@ -27,6 +28,7 @@ function selectTarget() {
 }
 
 function validateTarget(target) {
+    logDebug("validateTarget");
 	return (
 		target
 		&& target.visible
