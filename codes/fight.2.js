@@ -2,8 +2,9 @@
 
 function readyToFight() {
     logDebug("readyToFight");
-    return character.hp > character.max_hp * .90
-        && character.mp > character.max_mp * .90;
+    return (character.hp > character.max_hp * .90
+        && character.mp > character.max_mp * .90)
+        || select_monster_target({target:character.name});
 }
 
 function autoFight(target) {
@@ -24,7 +25,7 @@ function selectTarget() {
     if (target)
         return target;
     else
-        log("Broken!");
+        logError("Can't find a target!");
 }
 
 function validateTarget(target) {
@@ -77,7 +78,7 @@ function select_monster_target(args) {
             target = current;
         }
     }
-    //log(" returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
+    logTrace("Returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
     return target;
 }
 
