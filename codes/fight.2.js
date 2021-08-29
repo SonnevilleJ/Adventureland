@@ -68,13 +68,34 @@ function selectMonsterTarget(args) {
         const current = parent.entities[id];
 
         if (!is_monster(current) || !current.visible || current.dead) continue;
-        if (args.mtype && current.mtype !== args.mtype) continue;
-        if (args.min_xp && current.xp < args.min_xp) continue;
-        if (args.max_att && current.attack > args.max_att) continue;
-        if (args.max_hp && current.hp > args.max_hp) continue;
-        if (args.target && current.target !== args.target) continue;
-        if (args.no_target && current.target && current.target !== character.name) continue;
-        if (args.path_check && !can_move_to(current)) continue;
+        if (args.mtype && current.mtype !== args.mtype) {
+            logDebug("Ignoring MType: " + current.mtype);
+            continue;
+        }
+        if (args.min_xp && current.xp < args.min_xp) {
+            logDebug("Ignoring XP: " + current.xp);
+            continue;
+        }
+        if (args.max_att && current.attack > args.max_att) {
+            logDebug("Ignoring Attack: " + current.attack);
+            continue;
+        }
+        if (args.max_hp && current.hp > args.max_hp) {
+            logDebug("Ignoring HP: " + current.hp);
+            continue;
+        }
+        if (args.target && current.target !== args.target) {
+            logDebug("Ignoring friendly: " + current.name);
+            continue;
+        }
+        if (args.no_target && current.target && current.target !== character.name) {
+            logDebug("Ignoring no-target: " + current.xp);
+            continue;
+        }
+        if (args.path_check && !can_move_to(current)) {
+            logDebug("Ignoring path: " + current.name);
+            continue;
+        }
         if (blacklistedMobs.includes(current.name)) continue;
         const c_dist = parent.distance(character, current);
         if (c_dist < min_d) {
@@ -83,11 +104,9 @@ function selectMonsterTarget(args) {
         }
     }
     if (target) {
-        logTrace("Returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
+        logDebug("Returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
     } else {
-        logTrace("Can't find a monster target!");
+        logWarn("Can't find a monster target! " + JSON.stringify(args));
     }
     return target;
 }
-
-logTrace("fight loaded");

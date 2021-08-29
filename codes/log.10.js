@@ -24,9 +24,7 @@ function logTrace(message) {
 }
 
 function smartLog(message, logLevel) {
-    if(logLevel >= CurrentLogLevel) {
+    if (logLevel >= CurrentLogLevel) {
         log(message);
     }
 }
-
-logTrace("log loaded");

@@ -5,7 +5,7 @@ load_code("log");
 CurrentLogLevel = LogLevels.Error;
 
 setInterval(main, 250);
-logTrace(character.name + " main loop started");
+log(character.name + " main loop started");
 
 // Write your own CODE: https://github.com/kaansoral/adventureland
 // character.items.find(i => i.name = "hpot0").q

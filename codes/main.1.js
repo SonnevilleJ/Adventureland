@@ -12,6 +12,7 @@ function replenishHpMp() {
     logTrace("replenishHpMp")
     if (character.hp < character.max_hp) {
         useSkillIfAble("regen_hp");
+        return; // can't replenish HP **OR** MP afterwards
     }
     if (character.mp < character.max_mp) {
         useSkillIfAble("regen_mp");
@@ -29,7 +30,5 @@ function main() {
 
     loot();
 
-    if(readyToFight()) autoFight(selectTarget());
+    if (readyToFight()) autoFight(selectTarget());
 }
-
-logTrace("main loaded");
