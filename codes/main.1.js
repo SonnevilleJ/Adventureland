@@ -30,3 +30,5 @@ function main() {
 
     if(readyToFight()) autoFight(selectTarget());
 }
+
+logTrace("main loaded");

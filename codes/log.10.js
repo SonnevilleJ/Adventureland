@@ -28,3 +28,5 @@ function smartLog(message, logLevel) {
         log(message);
     }
 }
+
+logTrace("log loaded");

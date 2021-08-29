@@ -2,11 +2,11 @@ load_code("main");
 load_code("fight");
 load_code("log");
 
-CurrentLogLevel = LogLevels.Debug;
+CurrentLogLevel = LogLevels.Warn;
 logTrace(character.name + " loaded!");
 
 setInterval(main, 250);
-logTrace("Main loop started");
+logTrace("Senax main loop started");
 
 // // Hey there!
 // // This is CODE, lets you control your character with code.
