@@ -1,14 +1,15 @@
 // main.js
 
 function useSkillIfAble(skillName) {
-    logDebug("useSkillIfAble")
+    logTrace("useSkillIfAble")
 	if(!is_on_cooldown(skillName)) {
+        logDebug("Using *" + skillName + "*!");
 		use_skill(skillName);
 	}
 }
 
 function replenishHpMp() {
-    logDebug("replenishHpMp")
+    logTrace("replenishHpMp")
     if (character.hp < character.max_hp) {
         useSkillIfAble("regen_hp");
     }
@@ -18,7 +19,7 @@ function replenishHpMp() {
 }
 
 function main() {
-    logDebug("main")
+    logTrace("main")
     if (character.rip) {
         logTrace("Character is dead");
         return;

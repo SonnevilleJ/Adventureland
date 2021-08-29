@@ -8,33 +8,33 @@ const blacklistedMobs = [
 function readyToFight() {
     logDebug("readyToFight");
     return (character.hp > character.max_hp * .90
-        && character.mp > character.max_mp * .90)
-        || select_monster_target({target:character.name});
+            && character.mp > character.max_mp * .90)
+        || selectMonsterTarget({target: character.name});
 }
 
 function autoFight(target) {
-    logDebug("autoFight");
-    if (can_attack(target)) {
+    logTrace("autoFight");
+    if (target && can_attack(target)) {
         change_target(target);
         attack(target);
     }
 }
 
 function selectTarget() {
-    logDebug("selectTarget");
+    logTrace("selectTarget");
     let target = get_targeted_monster();
-    if (validateTarget(target)) {
+    if (isValidTargetForAttack(target)) {
         return target;
     }
-    target = select_monster_target({max_hp: 1100});
+    target = selectMonsterTarget({max_hp: 1100});
     if (target)
         return target;
     else
         logError("Can't find a target!");
 }
 
-function validateTarget(target) {
-    logDebug("validateTarget");
+function isValidTargetForAttack(target) {
+    logTrace("isValidTargetForAttack");
     return (
         target
         && target.visible
@@ -49,8 +49,8 @@ function validateTarget(target) {
     )
 }
 
-function select_monster_target(args) {
-    //game_log("select_monster_target start");
+function selectMonsterTarget(args) {
+    logTrace("selectMonsterTarget");
     //args:
     // max_att - max attack
     // min_xp - min XP
@@ -82,7 +82,11 @@ function select_monster_target(args) {
             target = current;
         }
     }
-    logTrace("Returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
+    if (target) {
+        logTrace("Returning monster " + target.name + " at X:" + target.x + " Y:" + target.y);
+    } else {
+        logTrace("Can't find a monster target!");
+    }
     return target;
 }
 
