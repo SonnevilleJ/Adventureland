@@ -26,11 +26,11 @@ function selectTarget() {
     if (isValidTargetForAttack(target)) {
         return target;
     }
-    target = selectMonsterTarget({max_hp: 1100});
+    target = selectMonsterTarget({max_hp: 5000, max_att: 60});
     if (target)
         return target;
     else
-        logError("Can't find a target!");
+        logWarn("Can't find a target!");
 }
 
 function isValidTargetForAttack(target) {

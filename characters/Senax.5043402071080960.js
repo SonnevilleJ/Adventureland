@@ -2,7 +2,7 @@ load_code("main");
 load_code("fight");
 load_code("log");
 
-CurrentLogLevel = LogLevels.Warn;
+CurrentLogLevel = LogLevels.Error;
 
 setInterval(main, 250);
 logTrace(character.name + " main loop started");
