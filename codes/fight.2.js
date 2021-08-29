@@ -1,5 +1,10 @@
 // fight.js
 
+const blacklistedMobs = [
+    "Kitty",
+    "Puppy",
+]
+
 function readyToFight() {
     logDebug("readyToFight");
     return (character.hp > character.max_hp * .90
@@ -59,9 +64,7 @@ function select_monster_target(args) {
     if (!args) args = {};
     if (args && args.target && args.target.name) args.target = args.target.name;
 
-    let count = 0;
     for (let id in parent.entities) {
-        count++;
         const current = parent.entities[id];
 
         if (!is_monster(current) || !current.visible || current.dead) continue;
@@ -72,6 +75,7 @@ function select_monster_target(args) {
         if (args.target && current.target !== args.target) continue;
         if (args.no_target && current.target && current.target !== character.name) continue;
         if (args.path_check && !can_move_to(current)) continue;
+        if (blacklistedMobs.includes(current.name)) continue;
         const c_dist = parent.distance(character, current);
         if (c_dist < min_d) {
             min_d = c_dist;
