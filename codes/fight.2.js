@@ -26,7 +26,16 @@ function selectTarget() {
     if (isValidTargetForAttack(target)) {
         return target;
     }
-    target = selectMonsterTarget({max_hp: 5000, max_att: 60});
+    target = selectMonsterTarget({
+        target: character.name
+    });
+    if (isValidTargetForAttack(target)) {
+        return target;
+    }
+    target = selectMonsterTarget({
+        max_hp: 8000,
+        max_att: 60,
+    });
     if (target)
         return target;
     else
